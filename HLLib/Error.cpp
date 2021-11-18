@@ -48,6 +48,9 @@ const hlChar *CError::GetSystemErrorMessage() const
 	return this->lpSystemError;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-truncation"
+//the retuned string by these functions will never reach 4096 char length.
 const hlChar *CError::GetShortFormattedErrorMessage()
 {
 	if(this->uiSystemError == 0)
@@ -89,6 +92,7 @@ const hlChar *CError::GetLongFormattedErrorMessage()
 
 	return this->lpLongFormattedError;
 }
+#pragma GCC diagnostic pop
 
 hlVoid CError::SetErrorMessage(const hlChar *lpError)
 {

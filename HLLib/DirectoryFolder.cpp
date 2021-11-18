@@ -254,10 +254,13 @@ public:
 
 				iResult = (hlInt)uiSize0 - (hlInt)uiSize1;
 
-				if(iResult != 0)
+                /*if(iResult != 0)
 				{
 					break;
 				}
+                */
+                break; //which will break?
+
 			}
 			//case HL_FIELD_NAME:
 			default:

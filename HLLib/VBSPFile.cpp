@@ -239,19 +239,25 @@ CDirectoryFolder *CVBSPFile::CreateRoot()
 	{
 		if(this->pHeader->lpLumps[i].uiLength > 0)
 		{
+
 			hlChar lpTemp[256];
-			this->GetFileName(lpTemp, sizeof(lpTemp) - 10);
+            //The map name cannot be longer than 64-bytes excluding the bsp extension (Induced from Quake). lpTemp is 4x bigger than that.
+            //Source engine will refuse to load a map which name is longer than 64-bytes
+            this->GetFileName(lpTemp, sizeof(lpTemp) - 10);
 			if(*lpTemp == '\0')
 			{
-				snprintf(lpFileName, sizeof(lpFileName), "lump_l_%d.lmp", i);
-			}
-			else
-			{
-				snprintf(lpFileName, sizeof(lpFileName), "%s_l_%d.lmp", lpTemp, i);
-			}
-			pLumpFolder->AddFile(lpFileName, HL_VBSP_LUMP_COUNT + i);
-		}
-	}
+                snprintf(lpFileName, sizeof(lpFileName), "lump_l_%d.lmp", i);
+            }
+            else
+            {
+#pragma GCC diagnostic push
+                #pragma GCC diagnostic ignored "-Wformat-truncation"
+                snprintf(lpFileName, sizeof(lpFileName), "%s_l_%d.lmp", lpTemp, i);
+#pragma GCC diagnostic pop
+            }
+            pLumpFolder->AddFile(lpFileName, HL_VBSP_LUMP_COUNT + i);
+        }
+    }
 
 	if(this->pEndOfCentralDirectoryRecord != 0)
 	{

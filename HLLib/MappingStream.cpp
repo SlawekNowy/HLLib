@@ -24,9 +24,13 @@ CMappingStream::CMappingStream(Mapping::CMapping &Mapping, hlULongLong uiMapping
 		switch(this->Mapping.GetType())
 		{
 		case HL_MAPPING_FILE:
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
+            // this one is deliberate
 			if(this->Mapping.GetMode() & HL_MODE_QUICK_FILEMAPPING)
 			{
 		case HL_MAPPING_MEMORY:
+#pragma GCC diagnostic pop
 				this->uiViewSize = this->uiMappingSize;
 				break;
 			}
