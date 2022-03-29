@@ -63,7 +63,7 @@ set(hllib_SRCS BSPFile.cpp Checksum.cpp DebugMemory.cpp DirectoryFile.cpp
 set(hllib_HDRS BSPFile.h Checksum.h DebugMemory.h DirectoryFile.h DirectoryFolder.h
 	DirectoryItem.h DirectoryItems.h Error.h FileMapping.h FileStream.h GCFFile.h
         GCFStream.h HLLib.h HLTypes.h Mapping.h Mappings.h MappingStream.h MemoryMapping.h MemoryStream.h
-	NCFFile.h NullStream.h Package.h Packages.h PAKFile.h ProcStream.h resource.h
+	NCFFile.h NullStream.h Package.h Packages.h PAKFile.h ProcStream.h "resource.h"
 	SGAFile.h stdafx.h Stream.h StreamMapping.h Streams.h Utility.h VBSPFile.h VPKFile.h
 	WADFile.h Wrapper.h XZPFile.h ZIPFile.h)
 

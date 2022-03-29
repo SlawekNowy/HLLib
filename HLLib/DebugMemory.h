@@ -12,7 +12,7 @@
 #ifndef DEBUGMEMORY_H
 #define DEBUGMEMORY_H
 
-#ifdef _DEBUG
+#ifdef DEBUG_MEM
 #	define DEBUG_TRACK_MEMORY 1
 #else
 #	define DEBUG_TRACK_MEMORY 0
@@ -26,6 +26,14 @@
 #	endif
 
 #	include <memory>
+
+#if !HAVE_STRLCPY
+#include "strlcpy.h"
+#endif
+
+#if !HAVE_STRLCAT
+#include "strlcat.h"
+#endif
 
 void StartTracking();
 void StopTracking();
