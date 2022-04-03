@@ -36,7 +36,7 @@ endif()
 add_definitions(-DHLLIB_EXPORTS)
 
 # ---- pkg config -------------------------------------------------------------
-# for CMAKE_INSTALL_LIBDIR:
+# for CMAKE_INSTALL_LIBDIR and CMAKE_INSTALL_BINDIR:
 include(GNUInstallDirs)
 include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/generate_symlink_code.cmake")
 
@@ -104,7 +104,11 @@ add_library(hllib SHARED ${hllib_SRCS} ${hllib_HDRS} HLLib.rc)
 target_link_libraries(hllib ${ZLIB_LIBRARIES})
 set_target_properties(hllib PROPERTIES SOVERSION ${HLLIB_MAJOR_VERSION} VERSION ${HLLIB_VERSION})
 
-install(TARGETS hllib DESTINATION ${CMAKE_INSTALL_LIBDIR})
+#this endures that in Windows enviroments this installs to bin/ otherwise to lib/
+install(TARGETS hllib LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+                      ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+                      RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/../lib/HLLib.h" DESTINATION "include/${HLLIB_NAME}")
 
 # ---- docs tareget -----------------------------------------------------------
