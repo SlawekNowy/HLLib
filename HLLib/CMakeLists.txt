@@ -105,11 +105,11 @@ target_link_libraries(hllib ${ZLIB_LIBRARIES})
 set_target_properties(hllib PROPERTIES SOVERSION ${HLLIB_MAJOR_VERSION} VERSION ${HLLIB_VERSION})
 
 #this endures that in Windows enviroments this installs to bin/ otherwise to lib/
-install(TARGETS hllib LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-                      ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-                      RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS hllib LIBRARY COMPONENT $<IF:$<BOOL:${WIN32}>,HLLIB-dev,HLLIB> DESTINATION ${CMAKE_INSTALL_LIBDIR}
+                      ARCHIVE COMPONENT HLLIB-dev DESTINATION ${CMAKE_INSTALL_LIBDIR}
+                      RUNTIME COMPONENT HLLIB DESTINATION ${CMAKE_INSTALL_BINDIR})
 
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/../lib/HLLib.h" DESTINATION "include/${HLLIB_NAME}")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/../lib/HLLib.h" DESTINATION "include/${HLLIB_NAME}" COMPONENT HLLIB-dev)
 
 # ---- docs tareget -----------------------------------------------------------
 if(BUILD_DOCS)
