@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.16)
 
 project(HLLib)
 
@@ -67,15 +67,16 @@ set(hllib_HDRS BSPFile.h Checksum.h DebugMemory.h DirectoryFile.h DirectoryFolde
 	SGAFile.h stdafx.h Stream.h StreamMapping.h Streams.h Utility.h VBSPFile.h VPKFile.h
 	WADFile.h Wrapper.h XZPFile.h ZIPFile.h)
 
-include(CheckCSourceCompiles)
+include(CheckCXXSourceCompiles)
 
-check_c_source_compiles("#include <stdio.h>
+# due to HLLib being CXX project, we need to use the CXX version of source compiles.
+check_cxx_source_compiles("#include <stdio.h>
 int main() { char buf[64]; return snprintf(buf, sizeof(buf), \"test\"); }" HAVE_SNPRINTF)
 
-check_c_source_compiles("#include <string.h>
+check_cxx_source_compiles("#include <string.h>
 int main() { char buf[64]; return (int) strlcpy(buf, \"test\", sizeof(buf)); }" HAVE_STRLCPY)
 
-check_c_source_compiles("#include <string.h>
+check_cxx_source_compiles("#include <string.h>
 int main() { char buf[64] = \"\"; return (int) strlcat(buf, \"test\", sizeof(buf)); }" HAVE_STRLCAT)
 
 
